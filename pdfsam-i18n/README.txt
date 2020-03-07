@@ -5,5 +5,3 @@ xgettext -ki18n -L Java -o po/pdfsam.pot --copyright-holder='Copyright 2018 by S
 
 To rename when downloaded from Launchpad
 rename 's/^PDFsam-//' *
-
-

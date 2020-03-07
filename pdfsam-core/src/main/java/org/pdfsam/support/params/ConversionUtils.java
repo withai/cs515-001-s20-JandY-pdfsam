@@ -23,6 +23,8 @@ import static org.sejda.conversion.AdapterUtils.splitAndTrim;
 
 import java.util.Collections;
 import java.util.Set;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.pdfsam.i18n.DefaultI18nContext;
 import org.sejda.common.collection.NullSafeSet;
@@ -38,6 +40,8 @@ public final class ConversionUtils {
     private ConversionUtils() {
         // hide
     }
+    
+    private static final int UNBOUNDED_END = Integer.MAX_VALUE;
 
     /**
      * @return the {@link PageRange} set for the given string, an empty set otherwise.
@@ -54,7 +58,26 @@ public final class ConversionUtils {
                 }
                 pageRangeSet.add(range);
             }
-            return pageRangeSet;
+            
+            Set<String> pages = new NullSafeSet<String>();
+            for(PageRange range: pageRangeSet) {
+            	if(range.getEnd() == UNBOUNDED_END) {
+            		pages.add(Integer.toString(range.getStart()) + "-");
+            	}
+            	else {
+            		for(int i=range.getStart(); i<=range.getEnd(); i++) {
+            			pages.add(Integer.toString(i));
+            		}
+            	}
+            }
+            
+            Set<PageRange> modPageRangeSet = new NullSafeSet<>();
+            for (String i: pages) {
+            	PageRange range = toPageRange(i);
+            	modPageRangeSet.add(range);
+            }
+            
+            return modPageRangeSet;
         }
         return Collections.emptySet();
     }
