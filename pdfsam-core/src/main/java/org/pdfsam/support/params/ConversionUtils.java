@@ -59,25 +59,28 @@ public final class ConversionUtils {
                 pageRangeSet.add(range);
             }
             
-            Set<String> pages = new NullSafeSet<String>();
-            for(PageRange range: pageRangeSet) {
-            	if(range.getEnd() == UNBOUNDED_END) {
-            		pages.add(Integer.toString(range.getStart()) + "-");
-            	}
-            	else {
-            		for(int i=range.getStart(); i<=range.getEnd(); i++) {
-            			pages.add(Integer.toString(i));
-            		}
-            	}
-            }
+            return pageRangeSet;
             
-            Set<PageRange> modPageRangeSet = new NullSafeSet<>();
-            for (String i: pages) {
-            	PageRange range = toPageRange(i);
-            	modPageRangeSet.add(range);
-            }
+//            Set<String> pages = new NullSafeSet<String>();
+//            for(PageRange range: pageRangeSet) {
+//            	if(range.getEnd() == UNBOUNDED_END) {
+//            		pages.add(Integer.toString(range.getStart()) + "-");
+//            	}
+//            	else {
+//            		for(int i=range.getStart(); i<=range.getEnd(); i++) {
+//            			pages.add(Integer.toString(i));
+//            		}
+//            	}
+//            }
+//            
+//            Set<PageRange> modPageRangeSet = new NullSafeSet<>();
+//            for (String i: pages) {
+//            	PageRange range = toPageRange(i);
+//            	modPageRangeSet.add(range);
+//            }
+//            
+//            return modPageRangeSet;
             
-            return modPageRangeSet;
         }
         return Collections.emptySet();
     }
