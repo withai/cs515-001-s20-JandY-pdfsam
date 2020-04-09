@@ -32,6 +32,7 @@ import org.pdfsam.ui.selection.multiple.LongColumn;
 import org.pdfsam.ui.selection.multiple.MultipleSelectionPane;
 import org.pdfsam.ui.selection.multiple.PageRangesColumn;
 import org.pdfsam.ui.selection.multiple.SelectionTableColumn;
+import org.pdfsam.ui.selection.multiple.SelectionTableRowData;
 import org.sejda.conversion.exception.ConversionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,14 +56,25 @@ public class RotateSelectionPane extends MultipleSelectionPane
     }
 
     @Override
-    public void apply(RotateParametersBuilder builder, Consumer<String> onError) {
-        try {
-            table().getItems().stream().filter(s -> !Objects.equals("0", trim(s.pageSelection.get())))
-                    .forEach(i -> builder.addInput(i.descriptor().toPdfFileSource(), i.toPageRangeSet()));
-            if (!builder.hasInput()) {
+    public void apply(RotateParametersBuilder builder, Consumer<String> onError)
+    {
+    	try
+        {
+            for(SelectionTableRowData s: table().getItems())
+            {
+            	if(!Objects.equals("0", trim(s.pageSelection.get())))
+            	{
+            		builder.addInput(s.descriptor().toPdfFileSource() , s.toPageRangeSet());
+            	}
+            }            
+
+            if (!builder.hasInput())
+            {
                 onError.accept(DefaultI18nContext.getInstance().i18n("No PDF document has been selected"));
             }
-        } catch (ConversionException e) {
+        }
+    	catch (ConversionException e)
+        {
             LOG.error(e.getMessage());
             onError.accept(e.getMessage());
         }
