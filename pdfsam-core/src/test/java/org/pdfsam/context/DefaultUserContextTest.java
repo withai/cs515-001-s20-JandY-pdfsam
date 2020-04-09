@@ -57,11 +57,11 @@ public class DefaultUserContextTest {
 
     @Test
     public void isCheckUpdatesSystemDefault() {
-        System.setProperty(DefaultUserContext.CHECK_FOR_UPDATES_PROP, "false");
+        System.setProperty(DefaultUserContext.Folders.CHECK_FOR_UPDATES_PROP.getPackage(), "false");
         assertFalse(victim.isCheckForUpdates());
         victim.setBooleanPreference(BooleanUserPreference.CHECK_UPDATES, true);
         assertTrue(victim.isCheckForUpdates());
-        System.clearProperty(DefaultUserContext.CHECK_FOR_UPDATES_PROP);
+        System.clearProperty(DefaultUserContext.Folders.CHECK_FOR_UPDATES_PROP.getPackage());
     }
 
     @Test
@@ -74,11 +74,11 @@ public class DefaultUserContextTest {
 
     @Test
     public void isCheckNewsSystemDefault() {
-        System.setProperty(DefaultUserContext.CHECK_FOR_NEWS_PROP, "false");
+        System.setProperty(DefaultUserContext.Folders.CHECK_FOR_NEWS_PROP.getPackage(), "false");
         assertFalse(victim.isCheckForNews());
         victim.setBooleanPreference(BooleanUserPreference.CHECK_FOR_NEWS, true);
         assertTrue(victim.isCheckForNews());
-        System.clearProperty(DefaultUserContext.CHECK_FOR_NEWS_PROP);
+        System.clearProperty(DefaultUserContext.Folders.CHECK_FOR_NEWS_PROP.getPackage());
     }
 
     @Test
@@ -115,11 +115,11 @@ public class DefaultUserContextTest {
 
     @Test
     public void isPlaySoundsSystemDefault() {
-        System.setProperty(DefaultUserContext.PLAY_SOUNDS_PROP, "false");
+        System.setProperty(DefaultUserContext.Folders.PLAY_SOUNDS_PROP.getPackage(), "false");
         assertFalse(victim.isPlaySounds());
         victim.setBooleanPreference(BooleanUserPreference.PLAY_SOUNDS, true);
         assertTrue(victim.isPlaySounds());
-        System.clearProperty(DefaultUserContext.PLAY_SOUNDS_PROP);
+        System.clearProperty(DefaultUserContext.Folders.PLAY_SOUNDS_PROP.getPackage());
     }
 
     @Test
@@ -132,11 +132,11 @@ public class DefaultUserContextTest {
 
     @Test
     public void isDonationNotificationSystemDefault() {
-        System.setProperty(DefaultUserContext.DONATE_NOTIFICATION_PROP, "false");
+        System.setProperty(DefaultUserContext.Folders.DONATE_NOTIFICATION_PROP.getPackage(), "false");
         assertFalse(victim.isDonationNotification());
         victim.setBooleanPreference(BooleanUserPreference.DONATION_NOTIFICATION, true);
         assertTrue(victim.isDonationNotification());
-        System.clearProperty(DefaultUserContext.DONATE_NOTIFICATION_PROP);
+        System.clearProperty(DefaultUserContext.Folders.DONATE_NOTIFICATION_PROP.getPackage());
     }
 
     @Test
@@ -149,11 +149,11 @@ public class DefaultUserContextTest {
 
     @Test
     public void isPremiumModulesSystemDefault() {
-        System.setProperty(DefaultUserContext.FETCH_PREMIUM_MODULES_PROP, "false");
+        System.setProperty(DefaultUserContext.Folders.FETCH_PREMIUM_MODULES_PROP.getPackage(), "false");
         assertFalse(victim.isFetchPremiumModules());
         victim.setBooleanPreference(BooleanUserPreference.PREMIUM_MODULES, true);
         assertTrue(victim.isFetchPremiumModules());
-        System.clearProperty(DefaultUserContext.FETCH_PREMIUM_MODULES_PROP);
+        System.clearProperty(DefaultUserContext.Folders.FETCH_PREMIUM_MODULES_PROP.getPackage());
     }
 
     @Test
@@ -175,11 +175,11 @@ public class DefaultUserContextTest {
 
     @Test
     public void getLocalesystemProp() {
-        System.setProperty(DefaultUserContext.LOCALE_PROP, "es");
+        System.setProperty(DefaultUserContext.Folders.LOCALE_PROP.getPackage(), "es");
         assertEquals("es", victim.getLocale());
         victim.setStringPreference(StringUserPreference.LOCALE, "");
         assertTrue(isBlank(victim.getLocale()));
-        System.clearProperty(DefaultUserContext.LOCALE_PROP);
+        System.clearProperty(DefaultUserContext.Folders.LOCALE_PROP.getPackage());
     }
 
     @Test
