@@ -34,13 +34,32 @@ import org.slf4j.LoggerFactory;
 public final class DefaultUserContext implements UserContext {
 
     private static final Logger LOG = LoggerFactory.getLogger(DefaultUserContext.class);
+    
+    enum Folders{
+    	CHECK_FOR_UPDATES_PROP("org.pdfsam.default.checkforupdate"),
+    	CHECK_FOR_NEWS_PROP("org.pdfsam.default.checkfornews"),
+    	DONATE_NOTIFICATION_PROP("org.pdfsam.default.donate.notification"),
+    	PLAY_SOUNDS_PROP("org.pdfsam.default.play.sounds"),
+    	FETCH_PREMIUM_MODULES_PROP("org.pdfsam.default.fetch.premium.module"),
+    	LOCALE_PROP("org.pdfsam.default.locale");
+    	
+    	private String Package;
+    	
+    	Folders(String folder){
+    		Package = folder;
+    	}
+    	
+    	public String getPackage() {
+    		return Package;
+    	}
+    }
 
-    static final String CHECK_FOR_UPDATES_PROP = "org.pdfsam.default.checkforupdate";
-    static final String CHECK_FOR_NEWS_PROP = "org.pdfsam.default.checkfornews";
-    static final String DONATE_NOTIFICATION_PROP = "org.pdfsam.default.donate.notification";
-    static final String PLAY_SOUNDS_PROP = "org.pdfsam.default.play.sounds";
-    static final String FETCH_PREMIUM_MODULES_PROP = "org.pdfsam.default.fetch.premium.modules";
-    static final String LOCALE_PROP = "org.pdfsam.default.locale";
+//    static final String CHECK_FOR_UPDATES_PROP = ;
+//    static final String CHECK_FOR_NEWS_PROP = "";
+//    static final String DONATE_NOTIFICATION_PROP = "org.pdfsam.default.donate.notification";
+//    static final String PLAY_SOUNDS_PROP = "org.pdfsam.default.play.sounds";
+//    static final String FETCH_PREMIUM_MODULES_PROP = "org.pdfsam.default.fetch.premium.modules";
+//    static final String LOCALE_PROP = "org.pdfsam.default.locale";
 
     private Preferences prefs;
 
@@ -65,19 +84,19 @@ public final class DefaultUserContext implements UserContext {
     @Override
     public boolean isPlaySounds() {
         return prefs.getBoolean(BooleanUserPreference.PLAY_SOUNDS.toString(),
-                Boolean.valueOf(System.getProperty(PLAY_SOUNDS_PROP, Boolean.TRUE.toString())));
+                Boolean.valueOf(System.getProperty(Folders.PLAY_SOUNDS_PROP.getPackage(), Boolean.TRUE.toString())));
     }
 
     @Override
     public boolean isDonationNotification() {
         return prefs.getBoolean(BooleanUserPreference.DONATION_NOTIFICATION.toString(),
-                Boolean.valueOf(System.getProperty(DONATE_NOTIFICATION_PROP, Boolean.TRUE.toString())));
+                Boolean.valueOf(System.getProperty(Folders.DONATE_NOTIFICATION_PROP.getPackage(), Boolean.TRUE.toString())));
     }
 
     @Override
     public boolean isFetchPremiumModules() {
         return prefs.getBoolean(BooleanUserPreference.PREMIUM_MODULES.toString(),
-                Boolean.valueOf(System.getProperty(FETCH_PREMIUM_MODULES_PROP, Boolean.TRUE.toString())));
+                Boolean.valueOf(System.getProperty(Folders.FETCH_PREMIUM_MODULES_PROP.getPackage(), Boolean.TRUE.toString())));
     }
 
     @Override
@@ -103,13 +122,13 @@ public final class DefaultUserContext implements UserContext {
     @Override
     public boolean isCheckForUpdates() {
         return prefs.getBoolean(BooleanUserPreference.CHECK_UPDATES.toString(),
-                Boolean.valueOf(System.getProperty(CHECK_FOR_UPDATES_PROP, Boolean.TRUE.toString())));
+                Boolean.valueOf(System.getProperty(Folders.CHECK_FOR_UPDATES_PROP.getPackage(), Boolean.TRUE.toString())));
     }
 
     @Override
     public boolean isCheckForNews() {
         return prefs.getBoolean(BooleanUserPreference.CHECK_FOR_NEWS.toString(),
-                Boolean.valueOf(System.getProperty(CHECK_FOR_NEWS_PROP, Boolean.TRUE.toString())));
+                Boolean.valueOf(System.getProperty(Folders.CHECK_FOR_NEWS_PROP.getPackage(), Boolean.TRUE.toString())));
     }
 
     @Override
@@ -124,7 +143,7 @@ public final class DefaultUserContext implements UserContext {
 
     @Override
     public String getLocale() {
-        return prefs.get(StringUserPreference.LOCALE.toString(), System.getProperty(LOCALE_PROP));
+        return prefs.get(StringUserPreference.LOCALE.toString(), System.getProperty(Folders.LOCALE_PROP.getPackage()));
     }
 
     @Override
